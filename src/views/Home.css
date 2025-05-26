@@ -1,0 +1,42 @@
+.name {
+  text-transform: uppercase;
+  color: #d9b24e;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-top: 1px solid #d9b24e;
+  border-bottom: 1px solid #d9b24e;
+  font-size: 2rem;
+
+  font-family: "Federo", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.weapon {
+  font-weight: 600;
+  color: #d9b24e;
+}
+
+.form-control {
+  margin-left: 0;
+  background: transparent;
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+  width: 130%;
+}
+
+.form-control:focus-visible {
+    outline: none;
+    box-shadow: none;
+    border-color: #d9b24e;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
