@@ -17,9 +17,9 @@ export const Header = () => {
     return () => unsubscribe();
   }, [user.team.id]);
 
-  return (
-    <div className="header w-100 d-flex justify-content-between align-items-center mb-4">
-      <div className="d-flex align-items-center">
+  return ( 
+    <div className="header w-100 d-flex flex-column align-items-center mb-4">
+      <div className="d-flex align-items-center mb-2">
         <div
           className="user-avatar"
           style={{ "--user-team-color": user.team?.color || "rgba(114, 246, 151, 0.39)" }}
