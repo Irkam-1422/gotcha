@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import "./Home.css";
-import {
-  addDocument,
-  deleteAllDocuments,
-  fetchNames,
-  fetchPlaces,
-  fetchWeapons,
-  updateDocument,
-} from "../routes";
-import { NameInput } from "./NameInput";
-import { Modal } from "./Modal";
+import { VictimCard } from "./VictimCard";
+import { ReadyCard } from "./ReadyCard";
+import { Dashboard } from "./Dashboard";
+import { Login } from "./Login";
 
 const names = [
   "Charlie",
@@ -85,94 +79,35 @@ const weapons = [
 ];
 
 export const Home = () => {
-  const [name, setName] = useState();
-  const [place, setPlace] = useState();
-  const [weapon, setWeapon] = useState();
-  const [ready, setReady] = useState(false);
-  const [selected, setSelected] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [currentName, setCurrentName] = useState("");
-
-  const addData = async () => {
-    await deleteAllDocuments("names");
-    await deleteAllDocuments("places");
-    await deleteAllDocuments("weapons");
-    names.forEach((name) => {
-      addDocument("name", name);
-    });
-    places.forEach((place) => {
-      addDocument("place", place);
-    });
-    weapons.forEach((weapon) => {
-      addDocument("weapon", weapon);
-    });
-  };
-
-  const randomize = (array) => {
-    return array[Math.floor(Math.random() * array.length)];
-  };
-
-  const handleSelect = async (currentName) => {
-    const names = await fetchNames(currentName);
-    const places = await fetchPlaces();
-    const weapons = await fetchWeapons();
-    const name = randomize(names);
-    const place = randomize(places);
-    const weapon = randomize(weapons);
-    setName(name);
-    setPlace(place);
-    setWeapon(weapon);
-    setTimeout(() => {
-      setShowModal(true);
-    }, 1000);
-    setSelected(true);
-  };
+  const [view, setView] = useState("");
 
   return (
-    <>
-      {ready ? (
-        <div className="">
-          <div className="name">
-            Let the <br /> game begin!
-          </div>
-          <div style={{ fontSize: ".9rem" }}>
-            You can now leave the page. <br /> And may the luck be with you.
-          </div>
-        </div>
-      ) : selected ? (
-        <div>
-          <div className="">You have to kill</div>
-          <div className="my-2 py-2 name">{name.name}</div>
-          <div className="">{place.place}</div>
-          <div className="">
-            with <b className="weapon">{weapon.weapon}</b>
-          </div>
-          <button
-            style={{ marginTop: "1rem" }}
-            onClick={async () => {
-              await updateDocument(name.id, "names", currentName);
-              await updateDocument(place.id, "places", currentName);
-              await updateDocument(weapon.id, "weapons", currentName);
-              setReady(true);
-            }}
-          >
-            I'm ready!
+    <div>
+      <div className="d-flex w-100">
+        {["victim", "dashboard", "ready", "login"].map((v) => (
+          <button key={v} onClick={() => setView(v)}>
+            {v}
           </button>
-        </div>
+        ))}
+      </div>
+      {view === "victim" ? (
+        <VictimCard />
+      ) : view === "dashboard" ? (
+        <Dashboard />
+      ) : view === "ready" ? (
+        <ReadyCard />
       ) : (
-        <NameInput
-          handleReturn={(name) => {
-            handleSelect(name);
-            setCurrentName(name);
-          }}
-        />
+        <Login />
       )}
-      <Modal
-        showModal={showModal}
-        setShowModal={async () => {
-          setShowModal(false);
-        }}
-      />
-    </>
+      {/* {view === "victim" ? (
+        <VictimCard />
+      ) : view === "dashboard" ? (
+        <Dashboard />
+      ) : view === "ready" ? (
+        <ReadyCard />
+      ) : (
+        <Login />
+      )} */}
+    </div>
   );
 };

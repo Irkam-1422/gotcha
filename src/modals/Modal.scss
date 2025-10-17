@@ -1,0 +1,44 @@
+.modal {
+  background: #000000bf;
+  justify-content: center;
+  align-items: center;
+
+  .modal-dialog {
+    width: 100%;
+
+    .modal-content {
+      background: #3a3a3a;
+
+      .modal-header {
+        border-color: #313131;
+        color: #d9b24e;
+
+        .title {
+            border: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.5rem;
+
+        }
+      }
+
+      .modal-body {
+        color: #fff;
+      }
+
+      .modal-footer {
+        border-color: #313131;
+
+        button {
+            padding-bottom: .25rem;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: #d9b24e;
+            color: #000;
+        }
+      }
+    }
+  }
+}
