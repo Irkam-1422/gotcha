@@ -7,7 +7,7 @@ export const TeamOverview = ({ team, players }) => {
     <div
       className="team-overview d-flex justify-content-between align-items-center mb-2"
       style={
-        { boxShadow: "0px 0px .25rem #d9b24e" }
+        { boxShadow: "0px 0px .25rem #d9b24e", fontSize: ".75rem" }
       }
     >
       <div className="color-box" style={{ backgroundColor: team.color }}></div>

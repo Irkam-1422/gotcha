@@ -24,6 +24,7 @@ export const Login = () => {
     }
     const user = await createUser(values.name, values.phone);
     dispatch(setUser(user));
+    localStorage.setItem("user", JSON.stringify(user));
     return () => unsubscribe();
   };
 

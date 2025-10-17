@@ -36,7 +36,7 @@ export const Home = () => {
       // if (subUser.currentVictim?.deathRejected) {
       //   dispatch(setShowMurderFail(true));
       // }
-      // localStorage.setItem("user", JSON.stringify(subUser));
+      localStorage.setItem("user", JSON.stringify(subUser));
     });
     return () => unsubscribe();
   }, [user.id]);
