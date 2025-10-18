@@ -189,7 +189,57 @@ const victimTransfer = async (user) => {
   await updateTeam(user.team.id, { coins: user.team.coins + 1 });
 };
 
+const getAllDocs = async (collectionName) => {
+  const colRef = collection(db, collectionName);
+  const snapshot = await getDocs(colRef);
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
+
+const removeCurrentVictims = async () => {
+  const users = await getUsers();
+  const teams = await getAllDocs("teams");
+  // const weapons = await getAllDocs("weapons");
+  // const locations = await getAllDocs("places");
+  // const actions = await getAllDocs("actions");
+  // console.log(weapons)
+  // console.log(locations)
+  // console.log(actions)
+  const lastIndex = users.length - 1;
+  await Promise.all(
+    users.map(async (user, i) => {
+      // const { currentVictim: _, ...victim } =
+      //   users[i + 1 > lastIndex ? 0 : i + 1];
+      // const { name, ...rest } = users[i - 1 < 0 ? lastIndex : i - 1];
+      // const weapon = weapons[i];
+      // const location = locations[i];
+      // const action = actions[i];
+      // const {members, ...team} = await setToTeam({ name:user.name, isAlive: true });
+      await updateTeam(teams[i % 3].id, { members: [...teams[i % 3].members, user.id] });
+      await updateUser(user.id, {
+        team: teams[i % 3],
+        // currentVictim: null,
+        // killer: null
+        // currentVictim: {
+        //   victim,
+        //   weapon,
+        //   location,
+        //   action,
+        //   teamRevealed: false,
+        //   deathRejected: false,
+        //   awaitingDeathConfirmation: false,
+        // },
+        // killer: { name },
+      });
+      // console.log(user.name, " -- ", victim.name, weapon.name, location.name, action.name, " -- ", name);
+    })
+  );
+};
+
 export {
+  removeCurrentVictims,
   victimTransfer,
   rejectDeath,
   confirmDeath,

@@ -27,7 +27,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div>
       <div className="my-5">
         <div className="title" style={{ fontSize: "1.2rem" }}>
           Teams:

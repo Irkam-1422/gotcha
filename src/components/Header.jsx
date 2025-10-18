@@ -15,7 +15,7 @@ export const Header = () => {
       setTeamCoins(team.coins);
     });
     return () => unsubscribe();
-  }, [user.team.id]);
+  }, [user.team?.id]);
 
   return ( 
     <div className="header w-100 d-flex flex-column align-items-center mb-4">

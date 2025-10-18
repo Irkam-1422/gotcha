@@ -6,22 +6,24 @@ import { Victim } from "./Victim";
 import { Dashboard } from "./Dashboard";
 import { DeathModal } from "../modals/DeathModal";
 import { GhostModal } from "../modals/GhostModal";
-import { createUtils } from "../routes/utils";
+import { cleanUtils, createUtils } from "../routes/utils";
 import { createTeams } from "../routes/teams";
 import { subscribeToUser } from "../routes/users";
 import { useDispatch } from "react-redux";
 import { setShowDeathModal, setShowMurderFail, setShowMurderSuccess, setUser } from "../actionCreators";
 import { MurderSuccess } from "../modals/MurderSuccess";
 import { MurderFail } from "../modals/MurderFail";
+import { removeCurrentVictims } from "../routes/users";
 
 export const Home = () => {
   const view = useSelector((state) => state.view);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   createUtils();
-  // },[])
+  useEffect(() => {
+    // removeCurrentVictims();
+    // createUtils();
+  },[])
 
   useEffect(() => {
     if (!user.id) return;
